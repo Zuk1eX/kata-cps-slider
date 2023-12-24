@@ -3,31 +3,39 @@ const brandsMoreBtn = document.querySelector(".brands__more-btn");
 
 brandsMoreBtn.addEventListener("click", () => {
   if (brandsCardsList.classList.contains("brands-cards__list--shown")) {
-    brandsMoreBtn.textContent = "Показать все";
-  } else {
-    brandsMoreBtn.textContent = "Скрыть";
-  }
-
-  brandsCardsList.classList.toggle("brands-cards__list--shown");
-  brandsMoreBtn.classList.toggle("more-button--hidden");
-});
-
-function toggleBrandsMoreBtn() {
-  brandsMoreBtn.textContent = "Показать все";
-  brandsMoreBtn.classList.toggle("hidden");
-}
-
-function toggleBrandsCardsList(on) {
-  if (on) {
-    brandsCardsList.classList.add("brands-cards__list");
-    swiperPagination.classList.add("hidden");
-    toggleBrandsMoreBtn();
+    brandsCardsList.classList.remove("brands-cards__list--shown");
+    toggleBrandsMoreBtn(false);
     return;
   }
 
-  brandsCardsList.classList.remove("brands-cards__list");
-  swiperPagination.classList.remove("hidden");
-  toggleBrandsMoreBtn();
+  brandsCardsList.classList.add("brands-cards__list--shown");
+  toggleBrandsMoreBtn(true);
+});
+
+function toggleBrandsMoreBtn(on) {
+  if (on) {
+    brandsMoreBtn.classList.add("more-button--shown");
+    brandsMoreBtn.textContent = "Скрыть";
+    return;
+  }
+
+  brandsMoreBtn.classList.remove("more-button--shown");
+  brandsMoreBtn.textContent = "Показать все";
+}
+
+function toggleBrandsCardsSlider(on) {
+  if (!on) {
+    brandsCardsList.classList.remove("brands-cards__list");
+    brandsCardsList.classList.remove("brands-cards__list--shown");
+    swiperPagination.classList.remove("hidden");
+    brandsMoreBtn.classList.add("hidden");
+    toggleBrandsMoreBtn(false);
+    return;
+  }
+
+  brandsCardsList.classList.add("brands-cards__list");
+  swiperPagination.classList.add("hidden");
+  brandsMoreBtn.classList.remove("hidden");
 }
 
 let init = false;
@@ -52,13 +60,13 @@ function swiperCard() {
       init = true;
       swiper = new Swiper(".swiper", swiperSettings);
 
-      toggleBrandsCardsList(false);
+      toggleBrandsCardsSlider(false);
     }
   } else if (init) {
     swiper.destroy();
     init = false;
 
-    toggleBrandsCardsList(true);
+    toggleBrandsCardsSlider(true);
   }
 }
 

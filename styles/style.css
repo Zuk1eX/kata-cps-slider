@@ -64,6 +64,7 @@ button {
 }
 
 .subtitle {
+  padding: 16px;
   color: #7e7e82;
   font-weight: 400;
   font-size: 16px;
@@ -71,7 +72,6 @@ button {
   letter-spacing: -0.2px;
   text-transform: uppercase;
   background: linear-gradient(90deg, #f8f8f8 0%, #fff 98.61%);
-  padding: 16px;
 }
 
 .brands__title {
@@ -96,7 +96,7 @@ button {
   background: url("../images/more-icon.svg") no-repeat center;
 }
 
-.more-button--hidden::before {
+.more-button--shown::before {
   transform: rotateX(180deg);
 }
 
